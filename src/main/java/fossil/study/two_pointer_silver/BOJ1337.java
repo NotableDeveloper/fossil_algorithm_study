@@ -40,6 +40,6 @@ public class BOJ1337 {
             arr[i] = sc.nextInt();
         }
 
-        // System.out.println(solution(n, arr));
+        System.out.println(solution(n, arr));
     }
 }

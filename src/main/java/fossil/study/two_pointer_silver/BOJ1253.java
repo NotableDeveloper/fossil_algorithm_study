@@ -16,7 +16,7 @@ public class BOJ1253 {
             while(lt < rt){
                 sum = arr[lt] + arr[rt];
 
-                // 두 포인터가 가리키는 곳의 합이 같으면 찾은 경우이다.
+                // 두 포인터가 가리키는 곳의 합이 같은 경
                 if(find == sum){
                     // 또 다른 GOOD을 찾기 위해 포인터 위치 조정
                     if(i == lt) lt++;
