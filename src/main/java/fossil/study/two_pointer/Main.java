@@ -1,4 +1,4 @@
-package fossil.study;
+package fossil.study.two_pointer;
 
 public class Main {
     public static void main(String[] args) {
