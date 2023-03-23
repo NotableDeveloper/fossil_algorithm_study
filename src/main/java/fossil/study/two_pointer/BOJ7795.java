@@ -16,8 +16,13 @@ class TestCase{
     int[] B;
 
     public void solution(){
+        // idx : B를 위한 인덱스
         int count = 0, idx = 0;
-
+        /*
+            A를 기준으로 B의 원소와 값을 비교한다.
+            이 때, B의 원소는 비교할 수록 이전에 A의 원소와 비교되었으므로
+            다음 원소부터 비교하도록 index 값을 증가시켜준 다음, while문이 끝나면 그 값을 누적한다.
+         */
         for(int i = 0; i < A.length; i++){
             while(idx < B.length && A[i] > B[idx]){
                 idx++;
