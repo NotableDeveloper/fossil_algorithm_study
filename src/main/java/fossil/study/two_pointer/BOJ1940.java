@@ -1,10 +1,32 @@
 package fossil.study.two_pointer;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class BOJ1940 {
     private static int solution(int n, int m, int[] materials) {
-        int answer = 0;
+        int answer = 0, lt = 0, rt = n - 1;
+
+        Arrays.sort(materials);
+
+        while(lt < rt){
+            int sum = materials[lt] + materials[rt];
+
+            if(sum == m){
+                answer++;
+                lt++;
+                rt = n - 1;
+            }
+
+            else if(sum < m){
+                lt++;
+            }
+
+            else if(sum > m){
+                rt--;
+            }
+        }
+
         return answer;
     }
 
