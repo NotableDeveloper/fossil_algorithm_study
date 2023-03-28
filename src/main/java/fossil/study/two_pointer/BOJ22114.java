@@ -1,4 +1,4 @@
-package fossil.study;
+package fossil.study.two_pointer;
 
 import java.util.Scanner;
 
