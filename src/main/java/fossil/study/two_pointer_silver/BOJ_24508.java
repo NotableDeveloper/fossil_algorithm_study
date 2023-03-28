@@ -6,16 +6,15 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BOJ_24508 {
     public static void main(String[] args) throws IOException {
         BOJ_24508 boj24508 = new BOJ_24508();
         InputStreamReader stdInputStream = new InputStreamReader(System.in);
         if(boj24508.solve(stdInputStream)){
-            System.out.println("YES");
+            System.out.print("YES");
         }else{
-            System.out.println("NO");
+            System.out.print("NO");
         };
     }
     private boolean solve(InputStreamReader inputStreamReader) throws IOException {
@@ -41,29 +40,24 @@ public class BOJ_24508 {
 
     private boolean moveNadori(Integer[] numberOfNadoriInBucket, int targetNumber, int numberOfMoves) {
         int left = 0,right = numberOfNadoriInBucket.length-1;
+        int howManyMoved = 0;
         while(left<right){
-            if(numberOfNadoriInBucket[left]<targetNumber){
-                if(numberOfNadoriInBucket[left] == 0){
-                    left+=1;
+            if(numberOfNadoriInBucket[left]>0){
+                numberOfNadoriInBucket[left] -= 1;
+                numberOfNadoriInBucket[right] += 1;
+                howManyMoved += 1;
+                if(numberOfNadoriInBucket[right] == targetNumber){
+                    numberOfNadoriInBucket[right] = 0;
+                    right -= 1;
                 }
-                if(numberOfNadoriInBucket[left]!=0){
-                    numberOfNadoriInBucket[left] -= 1;
-                    numberOfNadoriInBucket[right] += 1;
-                    if(numberOfMoves>0){
-                        numberOfMoves -= 1;
-                    }else{
-                        break;
-                    }
-                }
-            } if(numberOfNadoriInBucket[right]==targetNumber){
-                numberOfNadoriInBucket[right] = 0;
-                right-=1;
+            }else if(numberOfNadoriInBucket[left] == 0){
+                left += 1;
             }
         }
-        if(left<right){
+        if(howManyMoved > numberOfMoves){
             return false;
         }
-        return numberOfNadoriInBucket[left] >= 0;
+        return true;
     }
 
     private boolean canBoomAllNadori(Integer[] numberOfNadoriInBucket, int nadoriBoomNumber){
