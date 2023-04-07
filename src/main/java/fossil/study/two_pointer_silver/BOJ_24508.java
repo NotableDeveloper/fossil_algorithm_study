@@ -29,40 +29,35 @@ public class BOJ_24508 {
         int numberOfBucket = firstLine.get(0);
         int nadoriBoomNumber = firstLine.get(1);
         int numberOfMoves = firstLine.get(2);
-        Integer[] numberOfNadoriInBucket = Arrays.stream(br.readLine().split(" ")).sorted()
-                .map(Integer::parseInt).toArray(Integer[]::new);
-        if(!canBoomAllNadori(numberOfNadoriInBucket,nadoriBoomNumber)){
-            return false;
-        }
-        return moveNadori(numberOfNadoriInBucket,nadoriBoomNumber,numberOfMoves);
-
+        int[] numberOfNadoriInBucket = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).sorted()
+                .toArray();
+        return solution(numberOfNadoriInBucket, nadoriBoomNumber, numberOfMoves);
     }
-
-    private boolean moveNadori(Integer[] numberOfNadoriInBucket, int targetNumber, int numberOfMoves) {
-        int left = 0,right = numberOfNadoriInBucket.length-1;
-        int howManyMoved = 0;
-        while(left<right){
-            if(numberOfNadoriInBucket[left]>0){
-                numberOfNadoriInBucket[left] -= 1;
-                numberOfNadoriInBucket[right] += 1;
-                howManyMoved += 1;
-                if(numberOfNadoriInBucket[right] == targetNumber){
-                    numberOfNadoriInBucket[right] = 0;
-                    right -= 1;
-                }
-            }else if(numberOfNadoriInBucket[left] == 0){
-                left += 1;
+    private boolean solution( int arr[],int k, int t){
+        int left = 0, right = arr.length - 1;
+        int cntOfMoveNadori = 0;
+        while(left!=right){
+            if(cntOfMoveNadori > t){
+                return false;
             }
+            if(arr[right] == k){
+                arr[right] = 0;
+                right -= 1;
+                continue;
+            }
+            if(arr[left] == 0){
+                left += 1;
+                continue;
+            }
+            //나도리를 움직인다
+            arr[left] -= 1;
+            arr[right] += 1;
+            cntOfMoveNadori += 1;
+            //-------
         }
-        if(howManyMoved > numberOfMoves){
-            return false;
+        if (arr[right] == k || arr[right] == 0 ) {
+            return true;
         }
-        return true;
-    }
-
-    private boolean canBoomAllNadori(Integer[] numberOfNadoriInBucket, int nadoriBoomNumber){
-        int sumOfNadori = Arrays.stream(numberOfNadoriInBucket).mapToInt(Integer::intValue).sum();
-        int remain = sumOfNadori % nadoriBoomNumber;
-        return remain == 0;
+        return false;
     }
 }
