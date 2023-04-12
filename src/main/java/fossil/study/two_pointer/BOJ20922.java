@@ -7,21 +7,21 @@ import java.util.StringTokenizer;
 
 public class BOJ20922 {
     private static int solution(int n, int k, int[] arr) {
-        int answer = 0, lt = 0, rt = 0;
+        int answer = 0, left = 0, right = 0;
         int[] count = new int[100001];
 
-        while(lt < n){
-            if(count[arr[lt]] != k){
-                count[arr[lt]]++;
-                lt++;
+        while(right < n){
+            if(count[arr[right]] != k){
+                count[arr[right]]++;
+                right++;
             }
 
             else{
-                count[arr[rt]]--;
-                rt++;
+                count[arr[left]]--;
+                left++;
             }
 
-            answer = Math.max(answer, lt - rt);
+            answer = Math.max(answer, right - left);
         }
 
         return answer;
