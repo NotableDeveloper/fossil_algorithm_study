@@ -3,7 +3,9 @@ package fossil.study.bfs_dfs_silver_to_gold;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Queue;
 
 public class BOJ_1926 {
     static int[][] map;
@@ -29,7 +31,7 @@ public class BOJ_1926 {
         int cntOfImage = 0;
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[0].length; x++) {
-                int size = dfs(y,x);
+                int size = bfs(y,x);
                 if(size!=0){
                     cntOfImage += 1;
                 }
@@ -56,6 +58,34 @@ public class BOJ_1926 {
             }
             if(!visited[nextY][nextX]){
                 size += dfs(nextY,nextX);
+            }
+        }
+        return size;
+    }
+    private int bfs(int startY,int startX){
+        if(visited[startY][startX]||map[startY][startX] == 0){
+            return 0;
+        }
+        Queue<int[]> queue = new ArrayDeque<>();
+        int size = 1;
+        visited[startY][startX] = true;
+        queue.add(new int[]{startY,startX});
+        while(!queue.isEmpty()){
+            int curY = queue.peek()[0];
+            int curX = queue.peek()[1];
+            queue.poll();
+            for (int i = 0; i < dx.length; i++) {
+                int nextY = curY + dy[i];
+                int nextX = curX + dx[i];
+                if(nextY<0||nextX<0||nextY>=map.length||nextX>=map[0].length){
+                    continue;
+                }
+                if(!visited[nextY][nextX] && map[nextY][nextX]==1){
+                    queue.add(new int[]{nextY,nextX});
+                    visited[nextY][nextX] = true;
+                    size += 1;
+
+                }
             }
         }
         return size;
