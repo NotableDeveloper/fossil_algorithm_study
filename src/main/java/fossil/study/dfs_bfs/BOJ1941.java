@@ -1,4 +1,4 @@
-package dfs_bfs;
+package fossil.study.dfs_bfs;
 
 import java.io.BufferedReader;
 import java.io.IOException;
