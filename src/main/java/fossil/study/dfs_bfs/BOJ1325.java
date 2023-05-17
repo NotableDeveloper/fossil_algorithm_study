@@ -35,7 +35,10 @@ public class BOJ1325 {
 
             graph.get(trusting).add(trusted);
         }
-
+        /*
+            1번 노드부터 n번 노드까지 순차적으로 탐색한다.
+            탐색을 할 때마다 매번 새로운 visit 배열을 사용한다.
+         */
         for(int i = 1; i <= n; i++){
             visit = new int[n + 1];
             visit[i] = 1;
@@ -47,6 +50,11 @@ public class BOJ1325 {
         }
     }
 
+    /*
+        인접 리스트 안에서 방문이 가능하면 다음 노드를 대상으로 탐색.
+        방문이 가능한 노드이면 해킹이 가능한 것이므로, 해당 노드가 해킹 가능한
+        컴퓨터의 수를 늘려준다.
+     */
     public static void DFS(int node){
         for(int next : graph.get(node)){
             if(visit[next] == 0){
